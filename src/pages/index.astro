@@ -1,0 +1,50 @@
+---
+import Layout from "../layouts/Layout.astro";
+import directus from "../lib/directus";
+import { readSingleton, readItem } from "@directus/sdk";
+
+const homePage = await directus.request(readSingleton("home_page"));
+const serviceIds = homePage.Services || []; // Ensure an array even if undefined
+
+async function getServices() {
+  const servicePromises = serviceIds.map(id => {
+    return directus.request(readItem("services", id)).catch(error => {
+      console.error(`Error fetching service with ID ${id}:`, error);
+      return null; // Return null in case of an error
+    });
+  });
+
+  const fetchedServices = await Promise.all(servicePromises);
+
+  return fetchedServices.filter(service => service !== null); // Remove null values
+}
+
+const services = await getServices(); 
+---
+
+<Layout title={homePage.title}>
+  <main>
+    <div>
+      <h1>{homePage.heroHeadline}</h1>
+      <p set:html={homePage.heroContent} />
+      {homePage.heroButtons?.map(button => ( // Optional chaining for buttons
+        <button>
+          <a href={button?.href}>{button?.label}</a>
+        </button>
+      ))}
+    </div>
+
+    {services.length > 0 ? (
+      <div>
+        {services.map(service => (
+          <div> 
+            <h1>{service?.headline}</h1> {/* Optional chaining for service data */}
+            <p set:html={service?.content} /> 
+          </div>
+        ))}
+      </div>
+    ) : (
+      <p>No services available at the moment.</p>
+    )}
+  </main>
+</Layout>
