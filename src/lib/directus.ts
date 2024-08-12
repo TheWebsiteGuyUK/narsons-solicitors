@@ -24,10 +24,9 @@ type Services = {
   content: string;
   slug: string;
   image: string;
-  heroImage: string;
-  heroImageAlt: string;
-  heroHeadline: string;
-  heroContent: string;
+  header_headline: string;
+  header_image: string;
+  header_content: string;
   heroButtons: { label: string; href: string }[];
 
 }
@@ -35,10 +34,10 @@ type Services = {
 type Schema = {
   global: Global;
   home_page: HomePage;
-  services: Services;
+  services: Services[];
 }
 
 // Initialize Directus instance
-const directus = createDirectus<Schema>('https://portal.narsonssolicitors.co.uk/').with(rest());
+const directus = createDirectus<Schema>(import.meta.env.PUBLIC_API).with(rest());
 
 export default directus;

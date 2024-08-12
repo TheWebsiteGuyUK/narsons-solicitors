@@ -2,43 +2,106 @@
 import Layout from "@layouts/Layout.astro";
 import directus from "@lib/directus";
 import { readSingleton, readItems } from "@directus/sdk";
+import { Image } from "astro:assets";
 
 const homePage = await directus.request(readSingleton("home_page"));
+
 const services = await directus.request(
-  readItems("card", {
-    fields: [
-      "headline",
-      "content",
-    ],
+  readItems("services", {
+    fields: ["slug", "title", "header_headline", "header_image", "header_content"],
   })
 );
-
 ---
+
 <Layout title={homePage.title}>
-  <main>
-    <div>
-      <h1>{homePage.heroHeadline}</h1>
-      {homePage.title}
-      <p set:html={homePage.heroContent} />
-      {homePage.heroButtons?.map(button => ( // Optional chaining for buttons
-        <button>
-          <a href={button?.href}>{button?.label}</a>
-        </button>
-      ))}
+  <!--  Hero / Header Section -->
+  <section>
+    <div class="px-8 py-10 md:py-20 mx-auto max-w-screen-2xl">
+      <div
+        class="grid items-center grid-cols-1 gap-4 list-none lg:grid-cols-2 lg:gap-24">
+        <div>
+          <span class="text-xs font-bold tracking-wide text-gray-500 uppercase"
+            >Narsons Solicitors</span
+          >
+          <p
+            class="mt-4 text-4xl md:text-5xl font-bold tracking-tight text-gray-900 text-balance">
+            {homePage.heroHeadline}
+          </p>
+          <p
+            set:html={homePage.heroContent}
+            class="mt-4 text-base font-medium text-gray-500"
+          />
+          <div
+            class="flex flex-col items-center gap-2 mx-auto mt-8 md:flex-row">
+            {
+              homePage.heroButtons?.map((button) => (
+                <button>
+                  <a href={button?.href} class={`btn ${button?.variant}`}>
+                    {button?.label}
+                  </a>
+                </button>
+              ))
+            }
+          </div>
+        </div>
+        <div class="p-2 border bg-gray-50 rounded-3xl">
+          <div
+            class="h-full overflow-hidden bg-white border shadow-lg rounded-3xl">
+            <Image
+              src={`${import.meta.env.PUBLIC_API}/assets/${homePage.heroImage}`}
+              class="relative w-full rounded-2xl drop-shadow-2xl"
+              alt={homePage.heroImageAlt}
+              width={1600}
+              height={900}
+            />
+          </div>
+        </div>
+      </div>
     </div>
-    <ul>
-      {
-        services.map((service) => (
-          <li>
-            <a href={`/services/${service.slug}`}>
-              <h2>{service.headline}</h2>
-            </a>
-            <span>
-              {service.content}
-            </span>
-          </li>
-        ))
-      }
-     </ul>
-  </main>
+  </section>
+  <!-- End Hero / Header -->
+
+  <!-- Services -->
+  <section class="bg-primary-50">
+    <div class="px-8 py-24 mx-auto max-w-7xl">
+      <div class="text-center">
+        <h1
+          class="text-4xl font-semibold tracking-tighter text-gray-900 lg:text-5xl text-balance">
+          Our services
+        </h1>
+
+        <p
+          class="w-1/2 mx-auto mt-4 text-base font-medium text-gray-500 text-balance">
+          We provide a comprehensive range of legal services, including:
+        </p>
+
+        <div class="grid gap-2 mt-12 text-center md:grid-cols-3">
+          {
+            services.map((service) => (
+              <div class="bg-primary-100 rounded-3xl">
+                <div class="p-2  rounded-3xl">
+                  <Image
+                    src={`${import.meta.env.PUBLIC_API}/assets/${service.header_image}`}
+                    alt="#_"
+                    width={1600}
+                    height={900}
+                    class="w-full h-full mx-auto rounded-2xl border-2 border-primary-200/50"
+                  />
+                </div>
+                <div class="p-8">
+                  <p class="font-medium text-gray-900 text-2xl">{service.title}</p>
+                  <p
+                    set:html={service.header_content}
+                    class="mt-2 text-sm text-gray-500"
+                  />
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End servcies -->
+
 </Layout>

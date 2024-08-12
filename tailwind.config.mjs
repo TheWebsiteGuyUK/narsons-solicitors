@@ -23,5 +23,14 @@ export default {
       },
     },
   },
-  plugins: [require("preline/plugin")],
+  daisyui: {
+    themes: ["nord"],
+  },
+  plugins: [
+    require('@tailwindcss/typography'),
+    require('@tailwindcss/forms'),
+    require('daisyui'),
+    require("preline/plugin",
+
+    )],
 };
