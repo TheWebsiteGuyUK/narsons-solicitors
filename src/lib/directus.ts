@@ -71,6 +71,18 @@ type Services = {
   additional_content: string;
 }
 
+type SEO = {
+  meta_title: string;
+  meta_description: string;
+  og_title: string;
+  og_description: string;
+  og_image: string;
+  twitter_title: string;
+  twitter_description: string;
+  twitter_image_large: string;
+  twitter_image_small: string;
+}
+
 type Testimonials = {
   status: string;
   client_name: string;
@@ -85,6 +97,7 @@ type Schema = {
   testimonials: Testimonials[];
   legal_pages: LegalPages[];
   team: Team[];
+  seo: SEO;
 }
 
 // Initialize Directus instance

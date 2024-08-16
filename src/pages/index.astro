@@ -12,7 +12,7 @@ const companyDetails = await directus.request(readSingleton('company_details'))
 
 const services = await directus.request(
   readItems('services', {
-    fields: ['slug', 'title', 'excerpt', 'header_headline', 'header_image', 'header_content'],
+    fields: ['slug', 'title', 'excerpt', 'header_headline', 'header_image', 'header_content', 'header_image_alt'],
     filter: {
       status: {
         _eq: 'published',
@@ -24,9 +24,9 @@ const services = await directus.request(
 
 <Layout title={homePage.title}>
   <!--  Hero / Header Section -->
-  <section class="bg-cover bg-center" style={`background-image: url(${import.meta.env.PUBLIC_API}/assets/cf4f8ff3-877f-4546-8412-112775fb03f9.jpg);`}>
+  <section class="bg-cover bg-center" style={`background-image: url(${import.meta.env.PUBLIC_API}/assets/607ebe47-37b3-4736-93b1-ced72ae7eb25.webp);`}>
     <div class=" backdrop-blur-xs bg-white/80">
-      <div class="mx-auto max-w-screen-2xl px-3 pb-10 md:py-10 md:px-8">
+      <div class="mx-auto max-w-screen-2xl px-3 pt-5 pb-20 md:py-10 md:px-8">
         <div class="grid grid-cols-1 items-center gap-6 lg:grid-cols-2 lg:gap-24">
           <div class=" py-4 md:py-10">
             <a href="https://www.google.com/search?gs_ssp=eJzj4tVP1zc0zLE0TykyqSw3YLRSNagwsTA3M0ixMDAwNzcyNTAwtjKoMLS0TDEwNTROS0pKSTYyT_MSykssKs7PK1Yozs_JTM4syS8qBgDqvBX3&q=narsons+solicitors&oq=nars&gs_lcrp=EgZjaHJvbWUqFQgBEC4YJxivARjHARiABBiKBRiOBTIGCAAQRRg8MhUIARAuGCcYrwEYxwEYgAQYigUYjgUyEAgCEC4YxwEYsQMY0QMYgAQyBwgDEAAYgAQyCggEEAAYsQMYgAQyBggFEEUYPDIGCAYQRRg8MgYIBxBFGDzSAQgxODQ0ajBqNKgCALACAQ&sourceid=chrome&ie=UTF-8#lrd=0x48760d8007725003:0x199d0513fbbdc27f,1,,,," target="_blank" class="flex flex-row py-1 md:py-4 gap-1">
@@ -168,7 +168,7 @@ const services = await directus.request(
                 <div class="mt-4 overflow-hidden rounded-b-3xl ">
                   <Image
                     src={`${import.meta.env.PUBLIC_API}/assets/${service.header_image}`}
-                    alt="#_"
+                    alt={service.header_image_alt}
                     width={1600}
                     height={400}
                     class="mx-auto h-full w-full rounded-b-2xl"

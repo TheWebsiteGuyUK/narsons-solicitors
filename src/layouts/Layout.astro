@@ -1,45 +1,63 @@
 ---
-import Navbar from '@components/Navbar.astro';
+import Navbar from '@components/Navbar.astro'
 import Footer from '@components/Footer.astro'
 
-import directus from "@lib/directus";
-import { readSingleton } from "@directus/sdk";
+import directus from '@lib/directus'
+import { readSingleton } from '@directus/sdk'
 
-const companyDetails = await directus.request(readSingleton("company_details"));
+const companyDetails = await directus.request(readSingleton('company_details'))
+const seo = await directus.request(readSingleton('seo'))
 
 export interface Props {
-	title: string;
+  title: string
 }
 
-const { title} = Astro.props;
+const { title } = Astro.props
 ---
 
-<html lang="en" >
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/png" href="/favicon.png" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <meta name="viewport" content="width=device-width" />
 
-		
-		<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-		<title>{title} | {companyDetails.company_name} </title>
+    <!-- Primary Meta Tags -->
+    <title>{title} | {companyDetails.company_name}</title>
+    <meta name="title" content={seo.meta_title} />
+    <meta name="description" content={seo.meta_description} />
 
-		
-	</head>
-	<body class="bg-white">
-		<Navbar />
-		<main class="transition-overlay">
-			<slot />
-		</main>
-		<Footer />
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://narsonssolicitors.co.uk/" />
+    <meta property="og:title" content={seo.og_title} />
+    <meta property="og:description" content={seo.og_description} />
+    <meta property="og:image" content={`${import.meta.env.PUBLIC_API}/assets/${seo.og_image}`} />
 
-		
-	</body>
+    <!-- Twitter Meta Tags -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://narsonssolicitors.co.uk/" />
+    <meta property="twitter:title" content={seo.twitter_title} />
+    <meta property="twitter:description" content={seo.twitter_description} />
+    <meta property="twitter:image" content={`${import.meta.env.PUBLIC_API}/assets/${seo.twitter_image_large}`} />
+
+    
+    <meta property="twitter:card" content="summary" />
+    <meta property="twitter:image" content={`${import.meta.env.PUBLIC_API}/assets/${seo.twitter_image_small}`} />
+   
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  </head>
+  <body class="bg-white">
+    <Navbar />
+    <main class="transition-overlay">
+      <slot />
+    </main>
+    <Footer />
+  </body>
 </html>
 
 <script is:inline src="https://cdn.jsdelivr.net/npm/preline@2.4.1"></script>
 <script is:inline src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script is:inline>
-	AOS.init();
+  AOS.init()
 </script>

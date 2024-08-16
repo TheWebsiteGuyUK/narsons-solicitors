@@ -4,34 +4,32 @@ import react from "@astrojs/react";
 import swup from '@swup/astro';
 import tailwind from "@astrojs/tailwind";
 
+import playformCompress from "@playform/compress";
+
 // https://astro.build/config
 export default defineConfig({
   output: "server",
   adapter: node({
     mode: "standalone"
   }),
-  integrations: [
-    react(), 
-    tailwind(), 
-    swup({
-      theme: 'slide', 
-      animationClass: 'transition-',
-      containers: ['main'],
-      cache: true,
-      preload: true,
-      accessibility: true,
-      forms: false,
-      morph: true,
-      parallel: false,
-      progress: false,
-      routes: false,
-      smoothScrolling: true,
-      updateBodyClass: false,
-      updateHead: true,
-      reloadScripts: true,
-      debug: false,
-      loadOnIdle: true,
-      globalInstance: false,
-    }),
-  ]
+  integrations: [react(), tailwind(), swup({
+    theme: 'slide',
+    animationClass: 'transition-',
+    containers: ['main'],
+    cache: true,
+    preload: true,
+    accessibility: true,
+    forms: false,
+    morph: true,
+    parallel: false,
+    progress: false,
+    routes: false,
+    smoothScrolling: true,
+    updateBodyClass: false,
+    updateHead: true,
+    reloadScripts: true,
+    debug: false,
+    loadOnIdle: true,
+    globalInstance: false
+  }), playformCompress()]
 });
