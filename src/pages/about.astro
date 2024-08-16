@@ -1,0 +1,89 @@
+---
+import Layout from '@layouts/Layout.astro'
+import Contact from '@components/Contact.astro'
+import Team from '@components/Team.astro'
+
+import directus from '@lib/directus'
+import { readSingleton } from '@directus/sdk'
+const aboutPage = await directus.request(readSingleton('about_page'))
+---
+
+<Layout title={aboutPage.title}>
+  <section class="hero bg-top bg-cover" style={`background-image: url(${import.meta.env.PUBLIC_API}/assets/1f8fe390-8156-43ff-b99a-c707b18129fb.jpg);`}>
+    <div class="hero-overlay mx-auto bg-white/80 md:py-20">
+    <div class="mx-auto max-w-screen-2xl px-8 py-6 md:py-20">
+      <div class="flex flex-col text-center">
+        <div>
+          <p class="mt-8 text-balance text-3xl md:text-5xl font-bold tracking-tight text-primary-400">
+            {aboutPage.headline}
+          </p>
+          <div class="mt-4 text-md md:text-xl font-medium text-promary-600 max-w-3xl mx-auto">
+            <p set:html={aboutPage.intro} />
+          </div>
+      </div>
+    </div>
+</div>
+  </section>
+
+  <section
+    class="hero"
+    style={`background-image: url(${import.meta.env.PUBLIC_API}/assets/b3a0dd0d-0278-467d-bbbd-a2cc02346d6d.jpg);`} >
+    <div class="hero-overlay mx-auto bg-primary-500/80 py-20 px-8">
+      <article
+        class="prose prose-xl mx-auto max-w-screen-2xl rounded-2xl border bg-primary-50/20 px-6 text-primary-50 backdrop-blur-sm prose-h1:text-4xl prose-h2:font-bold prose-h1:text-white py-20 text-center" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
+        <div set:html={aboutPage.additional_info} />
+      </article>
+    </div>
+  </section>
+
+  <section>
+    <div class="mx-auto grid max-w-screen-2xl grid-cols-1 px-8 py-20 lg:grid-cols-3 gap-10">
+      <div id="mission" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
+        <div class="container">
+          <header>
+            <h1 class="text-4xl font-extrabold text-primary-500 underline decoration-dotted underline-offset-2">
+              Our Mission
+            </h1>
+          </header>
+          <article class="prose-h1: prose prose-xl max-w-none">
+            <p set:html={aboutPage.our_mission} />
+          </article>
+        </div>
+      </div>
+
+      <div id="vision" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+        <div class="container">
+          <header>
+            <h1 class="text-4xl font-extrabold text-primary-500 underline decoration-dotted underline-offset-2">
+              Our Vision
+            </h1>
+          </header>
+          <article class="prose prose-xl max-w-none">
+            <p set:html={aboutPage.our_vision} />
+          </article>
+        </div>
+      </div>
+
+      <div id="values" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
+        <div class="container">
+          <header>
+            <h1 class="text-4xl font-extrabold text-primary-500 underline decoration-dotted underline-offset-2">
+              Our Values
+            </h1>
+          </header>
+          <article class="prose prose-xl max-w-none">
+            <p set:html={aboutPage.our_values} />
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="meet-the-team" data-aos="fade-down" data-aos-duration="1000" data-aos-delay="100">
+    <Team />
+  </section>
+
+  <section class="bg-primary-50" id="contact">
+    <Contact />
+  </section>
+</Layout>

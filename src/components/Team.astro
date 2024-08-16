@@ -1,0 +1,66 @@
+---
+import directus from '@lib/directus'
+import { readItems } from '@directus/sdk'
+import { Image } from 'astro:assets'
+
+const teamMembers = await directus.request(
+  readItems('team', {
+    fields: ['*'],
+    filter: {
+      status: {
+        _eq: 'published',
+      },
+    },
+  })
+)
+---
+<section class="border-t-2 border-dashed">
+  <div class="mx-auto max-w-7xl px-8 py-24 md:px-12 lg:px-32">
+    <div class="text-center">
+      <h1 class="text-4xl font-bold tracking-tighter text-gray-900 lg:text-5xl">Meet Our Team</h1>
+      <p class="mt-4 text-base font-medium text-gray-500">Dedicated Experts Committed to Your Legal Success.</p>
+    </div>
+    <ul role="list" class="mt-12 grid gap-12 lg:grid-cols-2">
+      {
+        teamMembers.map((member) => (
+          <li>
+            <a href={`/team/${member.name}`}>
+              <div class="space-y-4">
+                <div class="aspect-[3/2] overflow-hidden rounded-3xl border p-2">
+                  <Image
+                    src={`${import.meta.env.PUBLIC_API}/assets/${member.picture}`}
+                    alt={member.name}
+                    width={1600}
+                    height={400}
+                    class="h-full w-full rounded-2xl object-cover"
+                  />
+                </div>
+                <div class="inline-flex w-full items-start justify-between">
+                  <div class="space-y-1">
+                    <h3 class="text-lg font-medium leading-6 text-black">{member.name}</h3>
+                    <p class="text-base text-gray-500">{member.position}</p>
+                  </div>
+                  <div>
+                    <ul role="list" class="flex space-x-5">
+                      <li>
+                        <a href={`/team/${member.name}`} class="text-gray-400 hover:text-gray-500">
+                          View profile
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#_" class="text-gray-400 hover:text-gray-500">
+                          <span class="sr-only"> Twitter </span>
+                          <ion-icon name="logo-twitter" role="img" class="md hydrated" aria-label="logo twitter" />
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

@@ -1,0 +1,144 @@
+---
+import { Image } from 'astro:assets'
+
+import directus from '@lib/directus'
+import { readSingleton, readItems } from '@directus/sdk'
+const companyDetails = await directus.request(readSingleton('company_details'))
+
+const services = await directus.request(
+  readItems('services', {
+    fields: ['slug', 'title'],
+    filter: {
+      status: {
+        _eq: 'published',
+      },
+    },
+  })
+)
+
+const legalPages = await directus.request(
+  readItems('legal_pages', {
+    fields: ['slug', 'title'],
+    filter: {
+      status: {
+        _eq: 'published',
+      },
+    },
+  })
+)
+---
+
+<footer class="bg-primary-500">
+  <div class="mx-auto max-w-screen-2xl px-4 sm:px-6 lg:px-8">
+    <div class="lg:grid lg:grid-cols-2">
+      <div class="border-b border-gray-100 py-8 lg:order-last lg:border-b-0 lg:border-s lg:py-16 lg:ps-16">
+        <div class="block lg:hidden">
+          <Image
+            src={`${import.meta.env.PUBLIC_API}/assets/${companyDetails.company_logo}`}
+            alt="Logo"
+            width={300}
+            height={100}
+            class="h-16 w-auto"
+          />
+        </div>
+
+        <div class="mt-8 space-y-4 lg:mt-0">
+          <span class="hidden h-1 w-10 rounded bg-primary-50 lg:block"></span>
+
+          <div>
+            <h2 class="text-2xl font-medium text-primary-50">Authorised &amp; Regulated</h2>
+
+            <p class="mt-4 max-w-lg text-primary-100">
+              Narsons Solicitors LTD is authorised and regulated by the Solicitors Regulation Authority under SRA
+              Number: 670279. Click <a
+                href="https://www.sra.org.uk/solicitors/standards-regulations/code-conduct-solicitors/"
+                class="underline">here</a
+              > to access the SRA Code of Conduct. List of Directors available for inspection at our registered office. We
+              use the term “Partner” to refer to a Director of Narsons Solicitors Ltd.
+            </p>
+          </div>
+
+          <div class="mt-6 w-full">
+            <div style="max-width:275px;max-height:163px;">
+              <div style="position: relative;padding-bottom: 59.1%;height: auto;overflow: hidden;">
+                <iframe
+                  frameborder="0"
+                  scrolling="no"
+                  allowtransparency="true"
+                  title="SRA Compliance"
+                  loading="lazy"
+                  src="https://cdn.yoshki.com/iframe/55845r.html"
+                  style="border:0px; margin:0px; padding:0px; backgroundColor:transparent; top:0px; left:0px; width:100%; height:100%; position: absolute;"
+                ></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="py-8 lg:py-16 lg:pe-16">
+        <div class="hidden text-teal-600 lg:block">
+          <Image
+            src={`${import.meta.env.PUBLIC_API}/assets/${companyDetails.company_logo}`}
+            alt="Logo"
+            width={300}
+            height={100}
+            class="h-16 w-auto"
+          />
+        </div>
+
+        <div class="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-2">
+          <div>
+            <p class="font-medium text-primary-100">Services</p>
+            <ul class="mt-6 space-y-4 text-sm">
+              {
+                services.map((service) => (
+                  <li>
+                    <a href={service.slug} class="text-primary-50 transition hover:opacity-75">
+                     
+                      {service.title}
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+
+          <div>
+            <p class="font-medium text-primary-100">Company</p>
+
+            <ul class="mt-6 space-y-4 text-sm">
+              <li>
+                <a href="/about" class="text-primary-50 transition hover:opacity-75"> About </a>
+              </li>
+
+              <li>
+                <a href="/about#meet-the-team" class="text-primary-50 transition hover:opacity-75"> Meet the Team </a>
+              </li>
+
+            </ul>
+          </div>
+        </div>
+
+        <div class="mt-8 border-t border-gray-100 pt-8">
+          <ul class="flex flex-wrap gap-4 text-xs text-primary-50">
+            {
+                legalPages.map((legalPage) => (
+                <li>
+              <a href={`/legal/${legalPage.slug}`} class="transition hover:opacity-75"> {legalPage.title} </a>
+            </li>
+                ))
+              }
+            
+          </ul>
+
+          <p class="mt-8 text-xs text-primary-100">
+            &copy; 2022. {companyDetails.company_name}. All rights reserved. Narsons Solicitors LTD is registered in
+            England and Wales with registered number: 12563382. Registered Office is 77 The Grove, Ealing, London W5
+            5LL.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

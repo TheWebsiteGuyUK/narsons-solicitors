@@ -1,0 +1,52 @@
+---
+import Layout from '@layouts/Layout.astro'
+import Contact from '@components/Contact.astro'
+import { Image } from 'astro:assets'
+
+import directus from '@lib/directus'
+import { readItems } from '@directus/sdk'
+
+export async function getStaticPaths() {
+  const teamMember = await directus.request(
+    readItems('team', {
+      fields: ['*'],
+      filter: {
+        status: {
+          _eq: 'published',
+        },
+      },
+    })
+  )
+  return teamMember.map((teamMember) => ({ params: { slug: teamMember.name }, props: teamMember }))
+}
+const teamMember = Astro.props
+export const prerender = true
+---
+
+<Layout title={teamMember.name}>
+  <header
+    class="bg-cover bg-bottom"
+    style={`background-image: url(${import.meta.env.PUBLIC_API}/assets/cf4f8ff3-877f-4546-8412-112775fb03f9.jpg);`}>
+    <div class="backdrop-blur-xs bg-white/80">
+      <div class="container mx-auto py-10 text-center md:py-20">
+        <Image
+          src={`${import.meta.env.PUBLIC_API}/assets/${teamMember.picture}`}
+          alt={teamMember.name}
+          width={1600}
+          height={400}
+          class="h-full max-h-60 md:max-h-80 w-auto rounded-2xl border object-cover p-2 mx-auto"
+        />
+        <h1 class="mb-3 text-4xl font-extrabold md:text-5xl py-5 md:py-10">{teamMember.name}</h1>
+        <p>{teamMember.position}</p>
+      </div>
+    </div>
+  </header>
+
+  <article class="max-w-2xl prose mx-auto md:prose-lg md:py-20 px-8" >
+    <p set:html={teamMember.bio} />
+  </article>
+
+  <section class="bg-primary-50 mt-20" id="contact">
+    <Contact />
+  </section>
+</Layout>

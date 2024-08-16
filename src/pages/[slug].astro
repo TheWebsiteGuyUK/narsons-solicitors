@@ -1,0 +1,129 @@
+---
+import Layout from '@layouts/Layout.astro'
+import { Image } from 'astro:assets'
+import Contact from '@components/Contact.astro'
+import directus from '@lib/directus'
+import { readItems } from '@directus/sdk'
+
+export async function getStaticPaths() {
+  const services = await directus.request(
+    readItems('services', {
+      fields: ['*', 'featured_services'],
+      filter: {
+        status: {
+          _eq: 'published',
+        },
+      },
+    })
+  );
+  return services.map((service) => ({ params: { slug: service.slug }, props: service }));
+}
+const service = Astro.props
+export const prerender = true
+---
+
+<Layout title={service.title}>
+  <section
+    class="bg-cover bg-center"
+    style={`background-image: url(${import.meta.env.PUBLIC_API}/assets/cf4f8ff3-877f-4546-8412-112775fb03f9.jpg);`}>
+    <div class="backdrop-blur-xs bg-white/90">
+    <div class="mx-auto max-w-screen-2xl px-8 py-12">
+      <div class="grid list-none grid-cols-1 items-center gap-4 lg:grid-cols-2 lg:gap-24">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wide text-gray-500">{service.title}</span>
+          <p class="mt-2 md:mt-8 text-balance text-3xl md:text-5xl font-bold tracking-tight text-gray-900">
+            {service.header_headline}
+          </p>
+          <div set:html={service.header_content} class="mt-4 text-md md:text-lg text-gray-500" />
+
+          <div class="mx-auto mt-8 flex flex-col items-center gap-2 md:flex-row">
+            <a href="#contact">
+              <button
+              class="btn bg-primary-500 text-white btn-lg"
+              aria-label="Primary action">
+              Get legal advice
+            </button>
+            </a>
+            <!-- <button
+              class="inline-flex h-12 w-full items-center justify-center gap-3 rounded-xl bg-gray-100 px-5 py-3 font-medium duration-200 hover:bg-gray-200 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 md:w-auto"
+              aria-label="Secondary action">
+              Request a callback
+            </button> -->
+          </div>
+        </div>
+        <div class="hidden md:block rounded-3xl border bg-gray-50 p-2">
+          <div class="h-full overflow-hidden rounded-3xl border bg-white shadow-lg">
+            <Image
+              src={`${import.meta.env.PUBLIC_API}/assets/${service.header_image}`}
+              alt={service.header_image_alt}
+              width={1600}
+              height={400}
+              class="relative w-full rounded-2xl drop-shadow-2xl"
+              loading={'eager'}
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </section>
+
+  <section
+    class="hero"
+    style={`background-image: url(${import.meta.env.PUBLIC_API}/assets/b3a0dd0d-0278-467d-bbbd-a2cc02346d6d.jpg);`}>
+    <div class="hero-overlay mx-auto bg-primary-500/80 py-20 px-8">
+      <article
+        class="prose prose-lg mx-auto max-w-screen-xl rounded-2xl border bg-primary-50/20 px-6 text-primary-50 backdrop-blur-sm prose-h1:text-4xl prose-h2:font-bold prose-h2:text-white prose-strong:text-primary-50 prose-li:text-primary-100" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
+        <div set:html={service.content} />
+      </article>
+    </div>
+  </section>
+
+  <section>
+    <div class="container mx-auto py-20 max-w-screen-2xl px-8">
+      <header class="text-center">
+        <h1 class="text-5xl font-bold mb-10">{service.featured_headline}</h1>
+      </header>
+      <div class="-mx-2 flex flex-wrap justify-center sm:mx-auto sm:mb-2">
+        <div class="-m-4 flex flex-wrap items-stretch">
+          {
+            service.featured_services.map((item) => (
+              <div class="p-4 md:w-full lg:w-1/2" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
+                <div class="flex flex-col rounded-lg border-2 bg-primary-50 border-gray-50 border-opacity-50 p-8 sm:flex-row">
+                  <div class="mb-4 inline-flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-full  text-primary-500 sm:mb-0 sm:mr-8">
+                    <svg class="w-12 h-12 fill-white" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-badge-check"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg>
+                  </div>
+                  <div class="flex-grow">
+                    <h2 class="title-font mb-3 text-lg font-bold text-gray-900">{item.service}</h2>
+                    <p class="text-base leading-relaxed">{item.details}</p>
+                  </div>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {service?.fees && (
+  <section class="border-t py-10">
+    <div class="container mx-auto max-w-screen-2xl">
+        <article set:html={service.fees} class="prose prose-lg max-w-none px-8 py-20" />
+    </div>
+  </section>
+  )}
+
+  {service?.additional_content && (
+    <section class="border-t py-10">
+      <div class="container mx-auto px-8 max-w-screen-2xl">
+          <article set:html={service.additional_content} class="prose max-w-none py-20" />
+      </div>
+    </section>
+  )}
+
+<section class="bg-primary-50" id="contact">
+  <Contact />
+</section>
+  
+</Layout>
