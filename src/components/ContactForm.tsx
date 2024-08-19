@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
+import { GoogleReCaptchaProvider, useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 
 interface ContactFormData {
   name: string;
   email: string;
   phone: string;
   message: string;
-  honeypot: string; // Add honeypot field to the form data
+  honeypot: string; 
 }
 
 interface FormErrors {
@@ -22,12 +23,13 @@ const ContactForm: React.FC = () => {
     email: '',
     phone: '',
     message: '',
-    honeypot: '', // Initialize honeypot
+    honeypot: '',
   });
 
   const [formErrors, setFormErrors] = useState<FormErrors>({});
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const { executeRecaptcha } = useGoogleReCaptcha(); // useGoogleReCaptcha hook to execute the reCAPTCHA
 
   const validateForm = () => {
     const errors: FormErrors = {};
@@ -72,7 +74,15 @@ const ContactForm: React.FC = () => {
       return; // Stop submission if there are validation errors
     }
 
+    if (!executeRecaptcha) {
+      console.error('Recaptcha not yet available');
+      return;
+    }
+
     setIsSubmitting(true);
+
+    // Execute reCAPTCHA
+    const token = await executeRecaptcha('contact_form');
 
     const PUBLIC_API = import.meta.env.PUBLIC_API; // Fetch from environment variables
     const PUBLIC_API_KEY = import.meta.env.PUBLIC_API_KEY; // Fetch the API key from environment variables
@@ -82,9 +92,9 @@ const ContactForm: React.FC = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${PUBLIC_API_KEY}`, // Use the API key for authorization if needed
+          'Authorization': `Bearer ${PUBLIC_API_KEY}`,
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, recaptchaToken: token }), // Send the reCAPTCHA token
       });
 
       if (response.ok) {
@@ -113,6 +123,8 @@ const ContactForm: React.FC = () => {
 
           <form onSubmit={handleSubmit}>
             <div className="grid gap-4">
+              {/* Form fields remain unchanged */}
+
               <div className="grid grid-cols-1">
                 <div>
                   <label htmlFor="name" className="sr-only">
@@ -225,4 +237,10 @@ const ContactForm: React.FC = () => {
   );
 };
 
-export default ContactForm;
+const ContactFormWithReCaptcha: React.FC = () => (
+  <GoogleReCaptchaProvider reCaptchaKey={import.meta.env.PUBLIC_RECAPTCHA_KEY}>
+    <ContactForm />
+  </GoogleReCaptchaProvider>
+);
+
+export default ContactFormWithReCaptcha;

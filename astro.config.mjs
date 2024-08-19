@@ -3,8 +3,9 @@ import node from "@astrojs/node";
 import react from "@astrojs/react";
 import swup from '@swup/astro';
 import tailwind from "@astrojs/tailwind";
-
 import playformCompress from "@playform/compress";
+
+import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
@@ -12,6 +13,7 @@ export default defineConfig({
   adapter: node({
     mode: "standalone"
   }),
+  site: 'https://narsonssolicitors.co.uk',
   integrations: [react(), tailwind(), swup({
     theme: 'slide',
     animationClass: 'transition-',
@@ -31,5 +33,5 @@ export default defineConfig({
     debug: false,
     loadOnIdle: true,
     globalInstance: false
-  }), playformCompress()]
+  }), playformCompress(), sitemap()]
 });
