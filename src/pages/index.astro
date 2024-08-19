@@ -63,14 +63,14 @@ const services = await directus.request(
                 src={`${import.meta.env.PUBLIC_API}/assets/${homePage.heroImage}`}
                 class="relative h-full w-full rounded-2xl drop-shadow-2xl"
                 alt={homePage.heroImageAlt}
-                width={900}
-                height={500}
+                width={534}
+                height={367}
                 loading={'eager'}
               />
             </div>
           </div>
         </div>
-        <dl class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center gap-3 md:gap-6 text-balance md:py-16" >
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center gap-3 md:gap-6 text-balance md:py-16" >
          <a href="#contact">
           <div class="rounded-xl bg-white/10 backdrop-blur-sm p-2 md:p-10 shadow-sm hover:shadow-xl shadow-primary-500 hover:scale-105 hover:ring-4  hover:ring-primary-500 transition-transform" data-aos="fade-up" data-aos-duration="1000">
             <div class="flex flex-row items-center gap-6">
@@ -92,8 +92,8 @@ const services = await directus.request(
                 >
               </div>
               <div>
-                <dt class="text-md md:text-xl font-bold text-gray-900">Message Us</dt>
-                <dd class="mt-2 text-sm font-medium text-gray-500">Reach out to an expert today.</dd>
+                <div class="text-md md:text-xl font-bold text-gray-900">Message Us</div>
+                <div class="mt-2 text-sm font-medium text-gray-500">Reach out to an expert today.</div>
               </div>
             </div>
           </div>
@@ -105,8 +105,8 @@ const services = await directus.request(
                   <svg class="h-8 w-8 md:h-20 md:w-20" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pinned"><path d="M18 8c0 3.613-3.869 7.429-5.393 8.795a1 1 0 0 1-1.214 0C9.87 15.429 6 11.613 6 8a6 6 0 0 1 12 0"/><circle cx="12" cy="8" r="2"/><path d="M8.714 14h-3.71a1 1 0 0 0-.948.683l-2.004 6A1 1 0 0 0 3 22h18a1 1 0 0 0 .948-1.316l-2-6a1 1 0 0 0-.949-.684h-3.712"/></svg>
                 </div>
                 <div>
-                  <dt class="text-md md:text-xl font-bold text-gray-900">Find Us</dt>
-                  <dd class="mt-2 text-sm font-medium text-gray-500">Get directions to our office</dd>
+                  <div class="text-md md:text-xl font-bold text-gray-900">Find Us</div>
+                  <div class="mt-2 text-sm font-medium text-gray-500">Get directions to our office</div>
                 </div>
               </div>
             </div>
@@ -133,13 +133,13 @@ const services = await directus.request(
                   >
                 </div>
                 <div>
-                  <dt class="text-md md:text-xl font-bold text-gray-900">Let's Talk</dt>
-                  <dd class="mt-2 text-sm font-medium text-gray-500">Call: <strong>{companyDetails.phone_number}</strong></dd>
+                  <div class="text-md md:text-xl font-bold text-gray-900">Let's Talk</div>
+                  <div class="mt-2 text-sm font-medium text-gray-500">Call: <strong>{companyDetails.phone_number}</strong></div>
                 </div>
               </div>
             </div>
           </a>
-        </dl>
+        </div>
       </div>
     </div>
     
@@ -169,8 +169,8 @@ const services = await directus.request(
                   <Image
                     src={`${import.meta.env.PUBLIC_API}/assets/${service.header_image}`}
                     alt={service.header_image_alt}
-                    width={1600}
-                    height={400}
+                    width={900}
+                    height={600}
                     class="mx-auto h-full w-full rounded-b-2xl"
                   />
                 </div>
