@@ -1,191 +1,601 @@
 ---
-import { Image } from "astro:assets"
-import directus from "@lib/directus";
-import { readSingleton } from "@directus/sdk";
+import { Image } from 'astro:assets'
+import directus from '@lib/directus'
+import { readSingleton } from '@directus/sdk'
 
-const company = await directus.request(readSingleton("company_details"));
-
-
+const company = await directus.request(readSingleton('company_details'))
 ---
 
-<header class="flex flex-wrap md:justify-start md:flex-nowrap z-50 w-full bg-primary-500 sticky top-0 shadow shadow-primary-900">
-    <nav class="relative max-w-screen-2xl w-full mx-auto md:flex md:items-center md:justify-between md:gap-3 py-2 px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between items-center gap-x-1">
-        <a class="flex-none font-semibold text-xl text-black focus:outline-none focus:opacity-80" href="/" aria-label="Brand">
-            <Image src={`${import.meta.env.PUBLIC_API}/assets/${company.company_logo}`} alt="Logo" width={1920} height={496} class="h-16 w-auto" loading={"eager"} />
-        </a>
-  
-        <!-- Collapse Button -->
-        <button type="button" class="hs-collapse-toggle md:hidden relative size-9 flex justify-center items-center font-medium text-[12px] rounded-lg border bg-gray-50 border-gray-200 text-gray-800 hover:bg-gray-100 focus:outline-none  disabled:opacity-50 disabled:pointer-events-none" id="hs-header-base-collapse"  aria-expanded="false" aria-controls="hs-header-base" aria-label="Toggle navigation"  data-hs-collapse="#hs-header-base" >
-          <svg class="hs-collapse-open:hidden size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" x2="21" y1="6" y2="6"/><line x1="3" x2="21" y1="12" y2="12"/><line x1="3" x2="21" y1="18" y2="18"/></svg>
-          <svg class="hs-collapse-open:block shrink-0 hidden size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-          <span class="sr-only">Toggle navigation</span>
-        </button>
-        <!-- End Collapse Button -->
-      </div>
-  
-      <!-- Collapse -->
-      <div id="hs-header-base" class="hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow md:block "  aria-labelledby="hs-header-base-collapse" >
-        <div class="overflow-hidden overflow-y-auto max-h-[75vh]   ">
-          <div class="py-2 md:py-0  flex flex-col md:flex-row md:items-center gap-0.5 md:gap-1">
-            <div class="grow">
-              <div class="flex flex-col md:flex-row md:justify-end md:items-center gap-0.5 md:gap-1">
-                <a class="p-2 flex items-center text-sm text-primary-50 " href="/" aria-current="page">
-                  <svg class="shrink-0 size-4 me-3 md:me-2 block md:hidden" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
-                  Home
-                </a>
-  
-                <!-- Mega Menu -->
-                <div class="hs-dropdown [--strategy:static] md:[--strategy:absolute] [--adaptive:none] [--is-collapse:true] md:[--is-collapse:false] ">
-                  <button id="hs-header-base-mega-menu-fullwidth" type="button" class="hs-dropdown-toggle w-full p-2 flex items-center text-sm text-primary-50 " aria-haspopup="menu" aria-expanded="false" aria-label="Mega Menu">
-                    <svg class="shrink-0 size-4 me-3 md:me-2 block md:hidden"  xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-scale"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg>
-                    
-                    Services
-                    <svg class="hs-dropdown-open:-rotate-180 md:hs-dropdown-open:rotate-0 duration-300 shrink-0 size-4 ms-auto md:ms-1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-                  </button>
-  
-                  <div class="hs-dropdown-menu transition-[opacity,margin] duration-[0.1ms] md:duration-[150ms] hs-dropdown-open:opacity-100 opacity-0 relative w-full min-w-60 hidden z-10 top-full start-0 before:absolute before:-top-5 before:start-0 before:w-full before:h-5" role="menu" aria-orientation="vertical" aria-labelledby="hs-header-base-mega-menu-fullwidth">
-                    <div class="md:mx-6 lg:mx-8 md:bg-white md:rounded-lg md:shadow-md">
-                      <!-- Grid -->
-                      <div class="py-1 md:p-2 md:grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-                        <div class="flex flex-col">
-                          <!-- Link -->
-                          <a class="p-3 flex gap-x-4 hover:bg-gray-100 focus:outline-none  rounded-lg" href="wills-and-probate">
-                            <svg class="text-primary-50 md:text-primary-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-scroll-text"><path d="M15 12h-5"/><path d="M15 8h-5"/><path d="M19 17V5a2 2 0 0 0-2-2H4"/><path d="M8 21h12a2 2 0 0 0 2-2v-1a1 1 0 0 0-1-1H11a1 1 0 0 0-1 1v1a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v2a1 1 0 0 0 1 1h3"/></svg>
-                            <div class="grow">
-                              <p class="font-medium text-sm text-primary-50 md:text-primary-500">Wills, Trusts & Probate</p>
-                              <p class="text-sm text-gray-500">Power of attorney, codicil, probate and more...</p>
-                            </div>
-                          </a>
-                          <!-- End Link -->
-  
-                          <!-- Link -->
-                          <a class="p-3 flex gap-x-4 hover:bg-gray-100 focus:outline-none  rounded-lg" href="family-law">
-                            <svg class="fill-primary-50 md:fill-primary-500 w-8 h-8" height="200px" width="200px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 297 297" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path d="M143.407,85.75c1.563,0.924,3.316,1.387,5.07,1.387s3.508-0.463,5.071-1.387c6.659-3.938,39.876-24.759,39.876-48.178 c0-15.342-12.318-27.823-27.459-27.823c-6.64,0-12.737,2.4-17.489,6.392c-4.754-3.991-10.852-6.392-17.493-6.392 c-15.142,0-27.46,12.481-27.46,27.823C103.523,60.992,136.747,81.815,143.407,85.75z M130.983,29.681 c4.151,0,7.528,3.54,7.528,7.892c0,5.504,4.462,9.966,9.966,9.966s9.966-4.462,9.966-9.966c0-4.352,3.374-7.892,7.522-7.892 c4.15,0,7.527,3.54,7.527,7.892c0,7.482-13.259,19.785-25.017,27.783c-11.76-7.998-25.021-20.302-25.021-27.783 C123.455,33.221,126.832,29.681,130.983,29.681z"></path> <path d="M296.978,251.93c-0.295-39.39-26.576-72.66-62.399-83.28c16.104-8.756,27.063-25.855,27.063-45.473 c0-28.507-23.138-51.698-51.578-51.698c-28.44,0-51.579,23.191-51.579,51.698c0,19.621,10.964,36.723,27.073,45.478 c-2.687,0.799-5.318,1.729-7.892,2.774c-6.483-9.171-17.149-15.174-29.193-15.174c-12.039,0-22.699,5.999-29.184,15.163 c-2.565-1.042-5.189-1.968-7.868-2.764c16.109-8.755,27.073-25.856,27.073-45.478c0-28.507-23.138-51.698-51.579-51.698 c-28.44,0-51.578,23.191-51.578,51.698c0,19.617,10.96,36.717,27.064,45.474C26.375,179.33,0,212.922,0,252.605 c0,5.504,4.462,9.966,9.966,9.966h82.716c-1.226,4.701-1.883,9.632-1.883,14.714c0,5.504,4.462,9.966,9.966,9.966h95.418 c0.007,0.001,0.015,0.001,0.02,0c5.505,0,9.966-4.462,9.966-9.966c0-0.234-0.008-0.467-0.023-0.697 c-0.057-4.837-0.711-9.53-1.88-14.017h82.75c0.007,0,0.015,0,0.02,0c5.505,0,9.966-4.462,9.966-9.966 C297,252.378,296.993,252.152,296.978,251.93z M210.064,91.41c17.449,0,31.646,14.251,31.646,31.767 c0,17.515-14.197,31.764-31.646,31.764c-17.45,0-31.647-14.249-31.647-31.764C178.416,105.661,192.613,91.41,210.064,91.41z M148.473,176.187c8.73,0,15.834,7.136,15.834,15.908c0,8.77-7.104,15.905-15.834,15.905c-8.73,0-15.831-7.135-15.831-15.905 C132.642,183.322,139.743,176.187,148.473,176.187z M86.915,91.41c17.45,0,31.647,14.251,31.647,31.767 c0,17.515-14.197,31.764-31.647,31.764c-17.449,0-31.646-14.249-31.646-31.764C55.269,105.661,69.466,91.41,86.915,91.41z M20.658,242.639c4.792-32.551,32.679-57.606,66.257-57.606c9.158,0,17.887,1.869,25.841,5.243 c-0.03,0.603-0.046,1.209-0.046,1.819c0,12.795,6.731,24.038,16.827,30.38c-10.986,3.855-20.474,10.952-27.307,20.164H20.658z M112.039,267.318c4.35-16.196,19.035-28.142,36.434-28.142c17.399,0,32.086,11.945,36.436,28.142H112.039z M194.708,242.639 c-6.832-9.209-16.313-16.311-27.296-20.165c10.096-6.342,16.827-17.585,16.827-30.379c0-0.607-0.017-1.208-0.047-1.807 c7.963-3.382,16.702-5.256,25.871-5.256c33.578,0,61.467,25.056,66.259,57.606H194.708z"></path> </g> </g></svg>
-                            <div class="grow">
-                              <p class="font-medium text-sm text-primary-50 md:text-primary-500">Family Law</p>
-                              <p class="text-sm text-gray-500">Divorce, child arrangements, pre-nuptials, civil partnerships and more...</p>
-                            </div>
-                          </a>
-                          <!-- End Link -->
-  
-                          <!-- Link -->
-                          <a class="p-3 flex gap-x-4 hover:bg-gray-100 focus:outline-none  rounded-lg" href="employment-law">
-                            <svg class="text-primary-50 md:text-primary-500 w-8 h-8" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-briefcase-business"><path d="M12 12h.01"/><path d="M16 6V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><path d="M22 13a18.15 18.15 0 0 1-20 0"/><rect width="20" height="14" x="2" y="6" rx="2"/></svg>
-                            <div class="grow">
-                              <p class="font-medium text-sm text-primary-50 md:text-primary-500">Employment Law</p>
-                              <p class="text-sm text-gray-500">Unfair dismissal, discrimination, equal pay, redundancy and more...</p>
-                            </div>
-                          </a>
-                          <!-- End Link -->
-                           <!-- Link -->
-                          <a class="p-3 flex gap-x-4 hover:bg-gray-100 focus:outline-none  rounded-lg" href="conveyancing-and-property">
-                            <svg class="w-8 h-8 fill-primary-50 md:fill-primary-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M1 22H23" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path> <path opacity="0.4" d="M19.7803 22.0098V17.5498" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M19.7996 10.8901C18.5796 10.8901 17.5996 11.8701 17.5996 13.0901V15.3601C17.5996 16.5801 18.5796 17.5601 19.7996 17.5601C21.0196 17.5601 21.9996 16.5801 21.9996 15.3601V13.0901C21.9996 11.8701 21.0196 10.8901 19.7996 10.8901Z" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M2.09961 21.9998V6.02979C2.09961 4.01979 3.09966 3.00977 5.08966 3.00977H11.3196C13.3096 3.00977 14.2996 4.01979 14.2996 6.02979V21.9998" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path> <path opacity="0.4" d="M5.7998 8.25H10.7498" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path> <path opacity="0.4" d="M5.7998 12H10.7498" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path> <path opacity="0.4" d="M8.25 22V18.25" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
-                            <div class="grow">
-                              <p class="font-medium text-sm text-primary-50 md:text-primary-500">Conveyancing & Property</p>
-                              <p class="text-sm text-gray-500">Buying, selling or re-mortgaging homes and more...</p>
-                            </div>
-                          </a>
-                          <!-- End Link -->
-                        </div>
-                        <!-- End Col -->
-  
-                        <div class="flex flex-col">
-        
-  
-                          <!-- Link -->
-                          <a class="p-3 flex gap-x-4 hover:bg-gray-100 focus:outline-none  rounded-lg" href="international-law">
-                            <svg class="text-primary-50 md:text-primary-500 w-8 h-8" class="text-current" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-globe"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
-                            <div class="grow">
-                              <p class="font-medium text-sm text-primary-50 md:text-primary-500">International Law</p>
-                              <p class="text-sm text-gray-500">Immigration, asylum, visa applications and more...</p>
-                            </div>
-                          </a>
-                          <!-- End Link -->
-  
-                          <!-- Link -->
-                          <a class="p-3 flex gap-x-4 hover:bg-gray-100 focus:outline-none  rounded-lg" href="landlord-and-tenant">
-                            <svg class="w-8 h-8 stroke-primary-50 fill-none md:stroke-primary-500" viewBox="0 0 24 24" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" ><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><defs></defs><path class="cls-1" d="M7.23,11.05H12L13,8.18h8.6l.95-1.91-.95-1.91H13L12,1.5H7.23A2.87,2.87,0,0,0,4.36,4.36V8.18A2.88,2.88,0,0,0,7.23,11.05Z"></path><line class="cls-1" x1="8.18" y1="8.18" x2="8.18" y2="4.36"></line><line class="cls-1" x1="18.68" y1="6.27" x2="18.68" y2="4.36"></line><line class="cls-1" x1="15.82" y1="6.27" x2="15.82" y2="4.36"></line><path class="cls-1" d="M13,8.18,15.79,11l-1.35,2.7,2,2,2,2,2,2-.66,2-2,.68-6.08-6.07L9,17.78,5.67,14.4a2.86,2.86,0,0,1-.13-3.91"></path><line class="cls-1" x1="10.38" y1="11.05" x2="8.37" y2="13.05"></line><line class="cls-1" x1="17.14" y1="19.13" x2="18.49" y2="17.78"></line><line class="cls-1" x1="15.12" y1="17.1" x2="16.47" y2="15.75"></line><path class="cls-1" d="M4.89,12.93a3.82,3.82,0,0,1-.53-7.49A3.82,3.82,0,0,1,8.18,6.62"></path></g></svg>
-                            <div class="grow">
-                              <p class="font-medium text-sm text-primary-50 md:text-primary-500">Landlord & Tenant</p>
-                              <p class="text-sm text-gray-500">Dispute resolutions, tenancy agreements and more...</p>
-                            </div>
-                          </a>
-                          <!-- End Link -->
-                           <!-- Link -->
-                          <a class="p-3 flex gap-x-4 hover:bg-gray-100 focus:outline-none  rounded-lg" href="litigation">
-                            <svg class="w-8 h-8 fill-primary-50 md:fill-primary-500"  viewBox="0 0 60 60" id="Capa_1" version="1.1" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  stroke-width="0.9"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path d="M38.666,26.923c-0.386,0.376-0.6,0.88-0.604,1.419c-0.003,0.539,0.205,1.046,0.586,1.427l1.246,1.246 c0.324,0.324,0.723,0.527,1.141,0.61c0.084,0.418,0.286,0.817,0.609,1.14l1.079,1.078c0.422,0.423,0.984,0.655,1.582,0.655 s1.16-0.232,1.582-0.655l8.856-8.856c0.873-0.872,0.873-2.292,0-3.164l-1.078-1.078c-0.323-0.323-0.721-0.525-1.138-0.609 c-0.085-0.429-0.296-0.824-0.612-1.141l-1.247-1.248c-0.377-0.377-0.892-0.612-1.434-0.588c-0.531,0.003-1.025,0.212-1.394,0.589 l-9.917-9.882c0.386-0.376,0.6-0.88,0.604-1.419s-0.205-1.046-0.586-1.427l-1.246-1.246c-0.313-0.314-0.714-0.51-1.137-0.591 c-0.081-0.425-0.285-0.831-0.613-1.159l-1.078-1.078c-0.844-0.845-2.319-0.847-3.165,0l-8.856,8.855 c-0.423,0.423-0.655,0.984-0.655,1.582c0,0.599,0.232,1.16,0.655,1.583l1.078,1.078c0.316,0.316,0.71,0.526,1.139,0.612 c0.086,0.428,0.295,0.822,0.611,1.138l1.246,1.246c0.375,0.375,0.893,0.59,1.423,0.59c0.004,0,0.008,0,0.012,0 c0.531-0.003,1.026-0.213,1.394-0.59l1.596,1.597c0.29,0.289,0.29,0.761,0,1.05l-7.253,7.253l-0.708-0.708 c-1.171-1.169-3.074-1.169-4.243,0.001s-1.169,3.073,0,4.243l0.707,0.707l-9.068,9.068c-0.527,0.527-1.189,0.902-1.914,1.084 l-2.906,0.726c-1.075,0.27-2.059,0.826-2.843,1.61l-0.326,0.325C0.637,45.154,0,46.69,0,48.324s0.637,3.173,1.793,4.329 l1.243,1.242c1.157,1.156,2.694,1.793,4.328,1.793c1.635,0,3.172-0.637,4.329-1.793l0.325-0.325 c0.784-0.783,1.341-1.767,1.61-2.844l0.726-2.905c0.181-0.724,0.556-1.386,1.084-1.914l9.068-9.068l0.707,0.707 c1.134,1.133,3.11,1.132,4.242,0.001c0.567-0.566,0.879-1.32,0.879-2.122c0-0.801-0.312-1.555-0.879-2.121l-0.707-0.707 l7.253-7.253c0.29-0.29,0.761-0.29,1.05-0.001L38.666,26.923z M53.399,23.405c0,0.045-0.012,0.11-0.069,0.168l-8.856,8.856 c-0.115,0.115-0.221,0.115-0.335,0l-1.079-1.078c-0.093-0.093-0.093-0.243,0-0.336l8.856-8.856 c0.046-0.046,0.107-0.069,0.168-0.069c0.061,0,0.122,0.023,0.168,0.069l1.078,1.078C53.387,23.294,53.399,23.36,53.399,23.405z M23.19,11.383c0-0.045,0.012-0.11,0.069-0.168l8.856-8.855c0.058-0.058,0.123-0.069,0.168-0.069s0.11,0.012,0.168,0.069 l1.078,1.078c0.093,0.093,0.093,0.243,0,0.336l-8.856,8.856c-0.092,0.093-0.243,0.092-0.336,0l-1.078-1.078 C23.202,11.494,23.19,11.429,23.19,11.383z M34.588,23.929l-8.667,8.668l2.121,2.121c0.189,0.189,0.293,0.44,0.293,0.707 c0,0.268-0.104,0.518-0.293,0.707c-0.377,0.379-1.036,0.379-1.414,0l-2.122-2.121L14.024,44.493 c-0.785,0.784-1.341,1.768-1.61,2.844l-0.726,2.905c-0.181,0.725-0.556,1.386-1.084,1.914l-0.325,0.325 C9.5,53.26,8.464,53.689,7.364,53.689c-1.084,0-2.146-0.44-2.914-1.207L3.208,51.24C2.429,50.46,2,49.425,2,48.324 s0.429-2.135,1.207-2.914l0.325-0.325C4.061,44.557,4.723,44.182,5.447,44l2.906-0.726c1.077-0.27,2.06-0.826,2.843-1.609 l10.483-10.482l-2.122-2.121c-0.39-0.39-0.39-1.025,0-1.415c0.195-0.194,0.451-0.292,0.707-0.292c0.256,0,0.512,0.098,0.708,0.292 l2.121,2.121l8.667-8.667c1.069-1.068,1.069-2.809,0-3.878l-1.596-1.597c-0.378-0.378-0.88-0.586-1.414-0.586 c-0.004,0-0.009,0-0.013,0c-0.539,0.003-1.043,0.218-1.402,0.586l-1.246-1.246c-0.058-0.058-0.069-0.123-0.069-0.168 s0.012-0.11,0.069-0.168l8.857-8.856c0.114-0.115,0.22-0.115,0.335,0l1.246,1.246c-0.377,0.368-0.586,0.863-0.589,1.395 c-0.003,0.534,0.212,1.057,0.59,1.434l9.899,9.899c0.378,0.378,0.88,0.586,1.414,0.586c0.004,0,0.008,0,0.013,0 c0.539-0.003,1.042-0.218,1.401-0.586l1.247,1.248c0.057,0.057,0.069,0.122,0.069,0.166c0,0.046-0.012,0.111-0.069,0.169 l-8.857,8.856l0,0.001c-0.094,0.091-0.243,0.091-0.335-0.001l-1.245-1.247c0.376-0.368,0.585-0.862,0.588-1.394 c0.003-0.533-0.211-1.057-0.589-1.435l-1.597-1.597C37.396,22.861,35.657,22.861,34.588,23.929z"></path> <path d="M53,51.689h-9c-3.86,0-7,3.141-7,7v1h23v-1C60,54.829,56.86,51.689,53,51.689z M39.101,57.689c0.464-2.279,2.485-4,4.899-4 h9c2.415,0,4.435,1.721,4.899,4H39.101z"></path> <path d="M42,48.689c-0.552,0-1,0.447-1,1s0.448,1,1,1h13c0.552,0,1-0.447,1-1s-0.448-1-1-1H42z"></path> </g> <g></g> <g></g> <g></g> <g></g> <g></g> <g></g> <g></g> <g></g> <g></g> <g></g> <g></g> <g></g> <g></g> <g></g> <g></g> </g></svg>
-                            <div class="grow">
-                              <p class="font-medium text-sm text-primary-50 md:text-primary-500">Litigation</p>
-                              <p class="text-sm text-gray-500">Commercial and contractual disputes, fraud investigations and more...</p>
-                            </div>
-                          </a>
-                          <!-- End Link -->
+<header
+  class="sticky top-0 z-50 flex w-full flex-wrap bg-primary-500 shadow shadow-primary-900 md:flex-nowrap md:justify-start">
+  <nav
+    class="relative mx-auto w-full max-w-screen-2xl px-4 py-2 sm:px-6 md:flex md:items-center md:justify-between md:gap-3 lg:px-8">
+    <div class="flex items-center justify-between gap-x-1">
+      <a
+        class="flex-none text-xl font-semibold text-black focus:opacity-80 focus:outline-none"
+        href="/"
+        aria-label="Brand">
+        <Image
+          src={`${import.meta.env.PUBLIC_API}/assets/${company.company_logo}`}
+          alt="Logo"
+          width={1920}
+          height={496}
+          class="h-16 w-auto"
+          loading={'eager'}
+        />
+      </a>
 
-                  
-                           <!-- Link -->
-                           <a class="p-3 flex gap-x-4 hover:bg-gray-100 focus:outline-none  rounded-lg" href="additional-services">
-                            <svg class="w-8 h-8 fill-primary-50 md:fill-primary-500"  viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" ><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>law-building</title> <g id="Layer_2" data-name="Layer 2"> <g id="invisible_box" data-name="invisible box"> <rect width="48" height="48" fill="none"></rect> </g> <g id="Q3_icons" data-name="Q3 icons"> <g> <rect x="5" y="36" width="38" height="4"></rect> <path d="M44,42H4a2,2,0,0,0-2,2v2H46V44A2,2,0,0,0,44,42Z"></path> <rect x="10" y="18" width="4" height="16"></rect> <rect x="22" y="18" width="4" height="16"></rect> <rect x="34" y="18" width="4" height="16"></rect> <path d="M44.9,11.4,24,2,3.1,11.4A2.1,2.1,0,0,0,2,13.2V14a2,2,0,0,0,2,2H44a2,2,0,0,0,2-2v-.8A2.1,2.1,0,0,0,44.9,11.4ZM11.6,12,24,6.4,36.4,12Z"></path> </g> </g> </g> </g></svg>
-                            <div class="grow">
-                              <p class="font-medium text-sm text-primary-50 md:text-primary-500">Additional Services</p>
-                              <p class="text-sm text-gray-500">Affidavits, company law, criminal law and more...</p>
-                            </div>
-                          </a>
-                          <!-- End Link -->
-                        </div>
-                        <!-- End Col -->
-  
-                        <div class="mt-2 md:mt-0 flex flex-col">
-                          <span class="ms-2.5 mb-2 font-semibold text-xs uppercase text-primary-50 md:text-primary-400">Need legal advice?</span>
-  
-                          <!-- Link -->
-                          <a class="p-3 flex gap-x-5 items-center rounded-xl hover:bg-gray-100 focus:outline-none " href="#contact">
-                            <div class="grow">
-                              <p class="text-sm text-primary-50 md:text-primary-500">
-                                 Let's discuss your legal needs and how our services can support you. Complete the form below, and one of our solicitors will contact you for a confidential consultation.
-                              </p>
-                              <p class="mt-3 inline-flex items-center gap-x-1 text-sm text-primary-600 decoration-2 group-hover:underline group-focus:underline font-medium ">
-                                Contact us today
-                                <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-                              </p>
-                            </div>
-                          </a>
-                          <!-- End Link -->
-                        </div>
-                        <!-- End Col -->
+      <!-- Collapse Button -->
+      <button
+        type="button"
+        class="hs-collapse-toggle relative flex size-9 items-center justify-center rounded-lg border border-gray-200 bg-gray-50 text-[12px] font-medium text-gray-800 hover:bg-gray-100 focus:outline-none disabled:pointer-events-none disabled:opacity-50 md:hidden"
+        id="hs-header-base-collapse"
+        aria-expanded="false"
+        aria-controls="hs-header-base"
+        aria-label="Toggle navigation"
+        data-hs-collapse="#hs-header-base">
+        <svg
+          class="size-4 hs-collapse-open:hidden"
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          ><line x1="3" x2="21" y1="6" y2="6"></line><line x1="3" x2="21" y1="12" y2="12"></line><line
+            x1="3"
+            x2="21"
+            y1="18"
+            y2="18"></line></svg
+        >
+        <svg
+          class="hidden size-4 shrink-0 hs-collapse-open:block"
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg
+        >
+        <span class="sr-only">Toggle navigation</span>
+      </button>
+      <!-- End Collapse Button -->
+    </div>
+
+    <!-- Collapse -->
+    <div
+      id="hs-header-base"
+      class="hs-collapse hidden grow basis-full overflow-hidden transition-all duration-300 md:block"
+      aria-labelledby="hs-header-base-collapse">
+      <div class="max-h-[75vh] overflow-hidden overflow-y-auto">
+        <div class="flex flex-col gap-0.5 py-2 md:flex-row md:items-center md:gap-1 md:py-0">
+          <div class="grow">
+            <div class="flex flex-col gap-0.5 md:flex-row md:items-center md:justify-end md:gap-1">
+              <a class="flex items-center p-2 text-sm text-primary-50" href="/" aria-current="page">
+                <svg
+                  class="me-3 block size-4 shrink-0 md:me-2 md:hidden"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  ><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path><path
+                    d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"
+                  ></path></svg
+                >
+                Home
+              </a>
+
+              <!-- Mega Menu -->
+              <div
+                class="hs-dropdown [--adaptive:none] [--is-collapse:true] [--strategy:static] md:[--is-collapse:false] md:[--strategy:absolute]">
+                <button
+                  id="hs-header-base-mega-menu-fullwidth"
+                  type="button"
+                  class="hs-dropdown-toggle flex w-full items-center p-2 text-sm text-primary-50"
+                  aria-haspopup="menu"
+                  aria-expanded="false"
+                  aria-label="Mega Menu">
+                  <svg
+                    class="me-3 block size-4 shrink-0 md:me-2 md:hidden"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-scale"
+                    ><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path><path
+                      d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path><path d="M7 21h10"></path><path
+                      d="M12 3v18"></path><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"></path></svg
+                  >
+
+                  Services
+                  <svg
+                    class="ms-auto size-4 shrink-0 duration-300 hs-dropdown-open:-rotate-180 md:ms-1 md:hs-dropdown-open:rotate-0"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg
+                  >
+                </button>
+
+                <div
+                  class="hs-dropdown-menu relative start-0 top-full z-10 hidden w-full min-w-60 opacity-0 transition-[opacity,margin] duration-[0.1ms] before:absolute before:-top-5 before:start-0 before:h-5 before:w-full hs-dropdown-open:opacity-100 md:duration-[150ms]"
+                  role="menu"
+                  aria-orientation="vertical"
+                  aria-labelledby="hs-header-base-mega-menu-fullwidth">
+                  <div class="md:mx-6 md:rounded-lg md:bg-white md:shadow-md lg:mx-8">
+                    <!-- Grid -->
+                    <div class="gap-4 py-1 md:grid md:grid-cols-2 md:p-2 lg:grid-cols-3">
+                      <div class="flex flex-col">
+                        <!-- Link -->
+                        <a
+                          class="flex gap-x-4 rounded-lg p-3 hover:bg-gray-100 focus:outline-none"
+                          href="wills-and-probate">
+                          <svg
+                            class="text-primary-50 md:text-primary-500"
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="0.9600000000000002"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="lucide lucide-scroll-text"
+                            ><path d="M15 12h-5"></path><path d="M15 8h-5"></path><path d="M19 17V5a2 2 0 0 0-2-2H4"
+                            ></path><path
+                              d="M8 21h12a2 2 0 0 0 2-2v-1a1 1 0 0 0-1-1H11a1 1 0 0 0-1 1v1a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v2a1 1 0 0 0 1 1h3"
+                            ></path></svg
+                          >
+                          <div class="grow">
+                            <p class="text-sm font-medium text-primary-50 md:text-primary-500">
+                              Wills, Trusts & Probate
+                            </p>
+                            <p class="text-sm text-gray-500">Power of attorney, codicil, probate and more...</p>
+                          </div>
+                        </a>
+                        <!-- End Link -->
+
+                        <!-- Link -->
+                        <a class="flex gap-x-4 rounded-lg p-3 hover:bg-gray-100 focus:outline-none" href="family-law">
+                          <svg
+                            class="h-8 w-8 fill-primary-50 md:fill-primary-500"
+                            height="200px"
+                            width="200px"
+                            version="1.1"
+                            id="Layer_1"
+                            xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                            viewBox="0 0 512 512"
+                            xml:space="preserve"
+                            stroke="#000000"
+                            stroke-width="0.00512"
+                            ><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g
+                              id="SVGRepo_tracerCarrier"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier">
+                              <g>
+                                <g>
+                                  <g>
+                                    <path
+                                      d="M264.533,290.133c-30.148,0-51.2,21.052-51.2,51.2v8.533c0,41.472,23.45,68.267,59.733,68.267 c36.284,0,59.733-26.795,59.733-68.267v-8.533c0-30.148-21.06-51.2-51.2-51.2H264.533z M315.733,341.333v8.533 c0,15.394-4.164,51.2-42.667,51.2c-38.511,0-42.667-35.806-42.667-51.2v-8.533c0-20.736,13.397-34.133,34.133-34.133H281.6 C302.327,307.2,315.733,320.597,315.733,341.333z"
+                                    ></path>
+                                    <path
+                                      d="M256.256,341.333h-0.094c-4.702,0-8.482,3.823-8.482,8.533c0,4.71,3.857,8.533,8.576,8.533 c4.71,0,8.533-3.823,8.533-8.533C264.789,345.156,260.966,341.333,256.256,341.333z"
+                                    ></path>
+                                    <path
+                                      d="M298.01,230.374c4.753,0.307,8.806-3.157,9.165-7.851l8.525-110.797c1.894-20.309,29.193-43.46,51.234-43.46H384 c22.46,0,49.749,23.057,51.226,43.324l8.533,110.933c0.341,4.471,4.079,7.876,8.499,7.876c0.213,0,0.444-0.008,0.666-0.026 c4.693-0.358,8.209-4.463,7.851-9.165l-8.533-110.899C449.963,79.036,412.177,51.2,384,51.2h-17.067 c-31.061,0-65.493,29.747-68.241,59.076l-8.533,110.933C289.801,225.911,293.316,230.016,298.01,230.374z"
+                                    ></path>
+                                    <path
+                                      d="M375.023,108.237c-1.161-3.49-4.42-5.837-8.09-5.837c-3.678,0-6.938,2.347-8.098,5.837 c-6.409,19.243-25.293,19.755-26.035,19.763c-4.719,0-8.533,3.823-8.533,8.533v34.133c0,28.501,19.473,68.267,51.2,68.267 c31.718,0,51.2-39.765,51.2-68.267v-34.133c0-4.71-3.823-8.533-8.533-8.533C417.766,128,381.44,127.462,375.023,108.237z M409.6,170.667c0,23.194-15.223,51.2-34.133,51.2c-18.91,0-34.133-28.006-34.133-51.2v-26.641 c8.354-1.894,18.671-6.656,26.249-16.35c11.947,11.955,31.019,15.693,42.018,16.862V170.667z"
+                                    ></path>
+                                    <path
+                                      d="M170.667,119.467h8.533c4.71,0,8.533-3.823,8.533-8.533c0-4.71-3.823-8.533-8.533-8.533h-8.533 c-4.719,0-8.533,3.823-8.533,8.533C162.133,115.644,165.948,119.467,170.667,119.467z"
+                                    ></path>
+                                    <path
+                                      d="M290.389,358.4c4.71,0,8.533-3.823,8.533-8.533c0-4.71-3.823-8.533-8.533-8.533h-0.094c-4.702,0-8.482,3.823-8.482,8.533 C281.813,354.577,285.67,358.4,290.389,358.4z"
+                                    ></path>
+                                    <path
+                                      d="M85.658,134.426c1.63,16.401,8.764,30.839,9.105,31.522c7.731,15.471,19.43,38.852,58.837,38.852 c39.407,0,51.098-23.381,58.829-38.852c0.341-0.683,7.475-15.121,9.114-31.522c5.274-2.901,8.858-8.525,8.858-14.959V102.4 c0-6.306-3.439-11.819-8.533-14.771v-2.295c0-28.237-22.972-51.2-51.2-51.2h-34.133c-28.237,0-51.2,22.963-51.2,51.2v2.295 C80.23,90.581,76.8,96.094,76.8,102.4v17.067C76.8,125.901,80.384,131.524,85.658,134.426z M93.867,102.4 c4.71,0,8.533-3.823,8.533-8.533v-8.533c0-18.825,15.309-34.133,34.133-34.133h34.133c18.825,0,34.133,15.309,34.133,34.133 v8.533c0,4.71,3.814,8.533,8.533,8.533v17.067c-4.719,0-8.533,3.823-8.533,8.533c0,14.763-7.56,30.174-7.637,30.319 c-8.883,17.766-16.717,29.414-43.563,29.414c-26.854,0-34.688-11.648-43.563-29.406c-0.085-0.154-7.637-15.565-7.637-30.327 c0-4.71-3.823-8.533-8.533-8.533V102.4z"
+                                    ></path>
+                                    <path
+                                      d="M298.667,426.667c-1.69,0-3.337,0.503-4.736,1.434l-20.864,13.909L252.194,428.1c-1.399-0.93-3.046-1.434-4.727-1.434 c-49.365,0-59.733,23.202-59.733,42.667c0,4.71,3.814,8.533,8.533,8.533c4.71,0,8.533-3.823,8.533-8.533 c0-6.861,0-24.849,40.115-25.583l23.415,15.616c2.867,1.911,6.596,1.911,9.463,0l23.424-15.616 c40.115,0.734,40.115,18.722,40.115,25.583c0,4.71,3.814,8.533,8.533,8.533c4.71,0,8.533-3.823,8.533-8.533 C358.4,449.869,348.032,426.667,298.667,426.667z"
+                                    ></path>
+                                    <path
+                                      d="M452.83,324.267h-0.034c-4.702,0-8.516,3.797-8.533,8.499l-0.529,136.533c-0.017,4.71,3.78,8.55,8.499,8.568h0.034 c4.702,0,8.516-3.797,8.533-8.499l0.529-136.533C461.346,328.124,457.549,324.284,452.83,324.267z"
+                                    ></path>
+                                    <path
+                                      d="M128,119.467h8.533c4.71,0,8.533-3.823,8.533-8.533c0-4.71-3.823-8.533-8.533-8.533H128 c-4.719,0-8.533,3.823-8.533,8.533C119.467,115.644,123.281,119.467,128,119.467z"
+                                    ></path>
+                                    <path
+                                      d="M196.096,274.748l7.142-35.635c43.085,0.973,74.095,11.708,83.601,29.167c2.244,4.139,7.407,5.666,11.571,3.413 c4.139-2.253,5.666-7.433,3.413-11.571c-13.389-24.61-50.68-38.144-105.011-38.144c-4.241-0.077-8.073,2.688-8.917,6.852 l-8.533,42.556c-0.922,4.625,2.065,9.122,6.69,10.044c0.572,0.119,1.126,0.171,1.69,0.171 C191.727,281.6,195.277,278.801,196.096,274.748z"
+                                    ></path>
+                                    <path
+                                      d="M491.076,264.542c-16.725-16.691-41.856-25.506-72.687-25.506c-4.932,0.094-8.764,3.729-8.789,8.508 c-0.009,1.741-0.606,42.59-34.133,42.59c-33.536,0-34.125-40.841-34.133-42.581c-0.009-4.702-3.831-8.508-8.533-8.508 c-4.719,0-8.533,3.814-8.533,8.533c0,19.081,9.216,53.837,42.667,58.931v43.358c0,4.71,3.814,8.533,8.533,8.533 c4.71,0,8.533-3.823,8.533-8.533V306.5c28.8-4.395,39.646-30.746,42.086-50.185c22.639,1.271,40.823,8.218,52.924,20.309 c10.274,10.249,15.923,24.132,15.923,39.108v136.533c0,4.71,3.814,8.533,8.533,8.533c4.71,0,8.533-3.823,8.533-8.533V315.733 C512,296.192,504.568,278.016,491.076,264.542z"
+                                    ></path>
+                                    <path
+                                      d="M153.6,221.867c-9.412,0-17.067,7.654-17.067,17.067c0,6.289,3.456,11.733,8.533,14.694v62.106 c0,4.71,3.814,8.533,8.533,8.533c4.71,0,8.533-3.823,8.533-8.533v-62.106c5.069-2.961,8.533-8.405,8.533-14.694 C170.667,229.521,163.004,221.867,153.6,221.867z"
+                                    ></path>
+                                    <path
+                                      d="M59.733,324.267c-4.719,0-8.533,3.823-8.533,8.533v136.533c0,4.71,3.814,8.533,8.533,8.533 c4.71,0,8.533-3.823,8.533-8.533V332.8C68.267,328.09,64.444,324.267,59.733,324.267z"
+                                    ></path>
+                                    <path
+                                      d="M119.279,228.77c-0.853-4.147-4.873-6.784-8.926-6.793c-44.826,0-79.113,9.6-96.597,27.042 C4.634,258.133,0,269.099,0,281.6v170.667c0,4.71,3.814,8.533,8.533,8.533c4.71,0,8.533-3.823,8.533-8.533V281.6 c0-7.919,2.867-14.626,8.747-20.506c13.295-13.269,41.574-21.163,78.191-21.982l41.242,197.828 c0.956,4.608,5.495,7.569,10.095,6.613c4.617-0.964,7.578-5.487,6.605-10.095L119.279,228.77z"
+                                    ></path>
+                                  </g>
+                                </g>
+                              </g>
+                            </g></svg
+                          >
+                          <div class="grow">
+                            <p class="text-sm font-medium text-primary-50 md:text-primary-500">Family Law</p>
+                            <p class="text-sm text-gray-500">
+                              Divorce, child arrangements, pre-nuptials, civil partnerships and more...
+                            </p>
+                          </div>
+                        </a>
+                        <!-- End Link -->
+
+                        <!-- Link -->
+                        <a
+                          class="flex gap-x-4 rounded-lg p-3 hover:bg-gray-100 focus:outline-none"
+                          href="employment-law">
+                          <svg
+                            class="h-8 w-8 text-primary-50 md:text-primary-500"
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="0.9600000000000002"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="lucide lucide-briefcase-business"
+                            ><path d="M12 12h.01"></path><path d="M16 6V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"></path><path
+                              d="M22 13a18.15 18.15 0 0 1-20 0"></path><rect width="20" height="14" x="2" y="6" rx="2"
+                            ></rect></svg
+                          >
+                          <div class="grow">
+                            <p class="text-sm font-medium text-primary-50 md:text-primary-500">Employment Law</p>
+                            <p class="text-sm text-gray-500">
+                              Unfair dismissal, discrimination, equal pay, redundancy and more...
+                            </p>
+                          </div>
+                        </a>
+                        <!-- End Link -->
+                        <!-- Link -->
+                        <a
+                          class="flex gap-x-4 rounded-lg p-3 hover:bg-gray-100 focus:outline-none"
+                          href="conveyancing-and-property">
+                          <svg
+                            class="h-8 w-8 stroke-primary-50 md:stroke-primary-500"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                            ><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g
+                              id="SVGRepo_tracerCarrier"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier">
+                              <path
+                                d="M2 22H22"
+                                stroke-width="0.9600000000000002"
+                                stroke-miterlimit="10"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"></path>
+                              <path
+                                d="M2.94995 22L2.99995 9.96999C2.99995 9.35999 3.28995 8.78004 3.76995 8.40004L10.77 2.95003C11.49 2.39003 12.4999 2.39003 13.2299 2.95003L20.23 8.39003C20.72 8.77003 21 9.34999 21 9.96999V22"
+                                stroke-width="0.9600000000000002"
+                                stroke-miterlimit="10"
+                                stroke-linejoin="round"></path>
+                              <path
+                                d="M13 17H11C10.17 17 9.5 17.67 9.5 18.5V22H14.5V18.5C14.5 17.67 13.83 17 13 17Z"
+                                stroke-width="0.9600000000000002"
+                                stroke-miterlimit="10"
+                                stroke-linejoin="round"></path>
+                              <path
+                                d="M9.5 13.75H7.5C6.95 13.75 6.5 13.3 6.5 12.75V11.25C6.5 10.7 6.95 10.25 7.5 10.25H9.5C10.05 10.25 10.5 10.7 10.5 11.25V12.75C10.5 13.3 10.05 13.75 9.5 13.75Z"
+                                stroke-width="0.9600000000000002"
+                                stroke-miterlimit="10"
+                                stroke-linejoin="round"></path>
+                              <path
+                                d="M16.5 13.75H14.5C13.95 13.75 13.5 13.3 13.5 12.75V11.25C13.5 10.7 13.95 10.25 14.5 10.25H16.5C17.05 10.25 17.5 10.7 17.5 11.25V12.75C17.5 13.3 17.05 13.75 16.5 13.75Z"
+                                stroke-width="0.9600000000000002"
+                                stroke-miterlimit="10"
+                                stroke-linejoin="round"></path>
+                              <path
+                                d="M19.0001 7L18.9701 4H14.5701"
+                                stroke-width="0.9600000000000002"
+                                stroke-miterlimit="10"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"></path>
+                            </g></svg
+                          >
+                          <div class="grow">
+                            <p class="text-sm font-medium text-primary-50 md:text-primary-500">
+                              Conveyancing & Property
+                            </p>
+                            <p class="text-sm text-gray-500">Buying, selling or re-mortgaging homes and more...</p>
+                          </div>
+                        </a>
+                        <!-- End Link -->
                       </div>
-                      <!-- End Grid -->
+                      <!-- End Col -->
+
+                      <div class="flex flex-col">
+                        <!-- Link -->
+                        <a
+                          class="flex gap-x-4 rounded-lg p-3 hover:bg-gray-100 focus:outline-none"
+                          href="international-law">
+                          <svg
+                            class="h-8 w-8 fill-primary-50 md:fill-primary-500"
+                            version="1.0"
+                            id="Layer_1"
+                            xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                            viewBox="0 0 64 64"
+                            enable-background="new 0 0 64 64"
+                            xml:space="preserve"
+                            stroke-width="0.00064"
+                            ><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g
+                              id="SVGRepo_tracerCarrier"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier">
+                              <path
+                                d="M32,0C14.327,0,0,14.327,0,32s14.327,32,32,32s32-14.327,32-32S49.673,0,32,0z M49.972,31 c-0.138-5.582-1.414-10.878-3.613-15.667c2.652-1.022,5.169-2.317,7.515-3.854c4.824,5.14,7.854,11.976,8.102,19.521H49.972z M33.333,61.966c-0.11,0.005-0.222,0.005-0.333,0.009V50.035c3.324,0.087,6.547,0.581,9.605,1.47 C40.184,55.541,37.029,59.084,33.333,61.966z M44.549,52.141c2.283,0.801,4.462,1.817,6.523,3.018 c-3.991,3.29-8.849,5.563-14.178,6.438C39.902,58.861,42.484,55.672,44.549,52.141z M21.394,51.505 c3.059-0.89,6.282-1.383,9.606-1.47v11.939c-0.111-0.004-0.223-0.004-0.333-0.009C26.97,59.084,23.816,55.541,21.394,51.505z M27.105,61.596c-5.329-0.874-10.187-3.147-14.178-6.438c2.062-1.2,4.24-2.217,6.523-3.017 C21.515,55.672,24.098,58.861,27.105,61.596z M2.025,31c0.248-7.545,3.277-14.381,8.102-19.521c2.346,1.536,4.862,2.831,7.515,3.854 C15.442,20.122,14.166,25.418,14.028,31H2.025z M43.57,14.196c-3.345,1.069-6.894,1.67-10.57,1.766V2.025 c0.111,0.004,0.223,0.004,0.333,0.009C37.541,5.314,41.047,9.453,43.57,14.196z M36.895,2.404 c5.944,0.976,11.298,3.696,15.521,7.622c-2.176,1.391-4.496,2.57-6.944,3.499C43.278,9.326,40.369,5.562,36.895,2.404z M31,2.025 v13.937c-3.677-0.096-7.226-0.696-10.57-1.766c2.523-4.743,6.029-8.882,10.237-12.162C30.777,2.029,30.889,2.029,31,2.025z M18.529,13.525c-2.448-0.929-4.769-2.108-6.944-3.499c4.223-3.926,9.576-6.646,15.521-7.622 C23.631,5.562,20.722,9.326,18.529,13.525z M19.532,16.009c3.622,1.189,7.472,1.873,11.468,1.972V31H16.031 C16.17,25.654,17.403,20.584,19.532,16.009z M31,33v15.036c-3.684,0.092-7.245,0.665-10.615,1.689 C17.732,44.712,16.188,39.029,16.031,33H31z M33,48.036V33h14.969c-0.156,6.029-1.701,11.712-4.354,16.726 C40.245,48.701,36.684,48.128,33,48.036z M33,31V17.98c3.996-0.099,7.846-0.782,11.468-1.972c2.129,4.575,3.362,9.646,3.501,14.991 H33z M2.025,33h12.003c0.154,6.253,1.74,12.146,4.447,17.369c-2.496,0.899-4.871,2.044-7.109,3.396 C5.827,48.513,2.294,41.172,2.025,33z M52.634,53.766c-2.238-1.353-4.613-2.497-7.109-3.396c2.707-5.224,4.293-11.116,4.447-17.369 h12.003C61.706,41.172,58.173,48.513,52.634,53.766z"
+                              ></path>
+                            </g></svg
+                          >
+                          <div class="grow">
+                            <p class="text-sm font-medium text-primary-50 md:text-primary-500">International Law</p>
+                            <p class="text-sm text-gray-500">Immigration, asylum, visa applications and more...</p>
+                          </div>
+                        </a>
+                        <!-- End Link -->
+
+                        <!-- Link -->
+                        <a
+                          class="flex gap-x-4 rounded-lg p-3 hover:bg-gray-100 focus:outline-none"
+                          href="landlord-and-tenant">
+                          <svg
+                            class="h-8 w-8 stroke-primary-50 md:stroke-primary-500"
+                            viewBox="0 0 24 24"
+                            id="Layer_1"
+                            data-name="Layer 1"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="#000000"
+                            ><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g
+                              id="SVGRepo_tracerCarrier"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"
+                              ><defs
+                                ><style>
+                                  .cls-1 {
+                                    fill: none;
+                                    stroke-miterlimit: 10;
+                                    stroke-width: 0.9600000000000002;
+                                  }
+                                </style></defs
+                              ><path
+                                class="cls-1"
+                                d="M7.23,11.05H12L13,8.18h8.6l.95-1.91-.95-1.91H13L12,1.5H7.23A2.87,2.87,0,0,0,4.36,4.36V8.18A2.88,2.88,0,0,0,7.23,11.05Z"
+                              ></path><line class="cls-1" x1="8.18" y1="8.18" x2="8.18" y2="4.36"></line><line
+                                class="cls-1"
+                                x1="18.68"
+                                y1="6.27"
+                                x2="18.68"
+                                y2="4.36"></line><line class="cls-1" x1="15.82" y1="6.27" x2="15.82" y2="4.36"
+                              ></line><path
+                                class="cls-1"
+                                d="M13,8.18,15.79,11l-1.35,2.7,2,2,2,2,2,2-.66,2-2,.68-6.08-6.07L9,17.78,5.67,14.4a2.86,2.86,0,0,1-.13-3.91"
+                              ></path><line class="cls-1" x1="10.38" y1="11.05" x2="8.37" y2="13.05"></line><line
+                                class="cls-1"
+                                x1="17.14"
+                                y1="19.13"
+                                x2="18.49"
+                                y2="17.78"></line><line class="cls-1" x1="15.12" y1="17.1" x2="16.47" y2="15.75"
+                              ></line><path
+                                class="cls-1"
+                                d="M4.89,12.93a3.82,3.82,0,0,1-.53-7.49A3.82,3.82,0,0,1,8.18,6.62"></path></g
+                            ></svg
+                          >
+                          <div class="grow">
+                            <p class="text-sm font-medium text-primary-50 md:text-primary-500">Landlord & Tenant</p>
+                            <p class="text-sm text-gray-500">Dispute resolutions, tenancy agreements and more...</p>
+                          </div>
+                        </a>
+                        <!-- End Link -->
+                        <!-- Link -->
+                        <a class="flex gap-x-4 rounded-lg p-3 hover:bg-gray-100 focus:outline-none" href="litigation">
+                          <svg
+                            class="h-8 w-8 fill-primary-50 md:fill-primary-500"
+                            viewBox="0 0 36 36"
+                            version="1.1"
+                            preserveAspectRatio="xMidYMid meet"
+                            xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                            ><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g
+                              id="SVGRepo_tracerCarrier"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier">
+                              <title>gavel-line</title>
+                              <path
+                                d="M23.7,10.41a1,1,0,0,1-.71-.29L15.56,2.69A1,1,0,0,1,17,1.28l7.44,7.43a1,1,0,0,1-.71,1.7Z"
+                              ></path><path
+                                d="M11.86,22.25a1,1,0,0,0-.29-.71L4.14,14.11a1,1,0,0,0-1.42,1.42L10.15,23a1,1,0,0,0,1.42,0A1,1,0,0,0,11.86,22.25Z"
+                              ></path><path
+                                d="M21.93,34H3a1,1,0,0,1-1-1.27l1.13-4a1,1,0,0,1,1-.73H20.8a1,1,0,0,1,1,.73l1.13,4a1,1,0,0,1-.17.87A1,1,0,0,1,21.93,34ZM4.31,32H20.6L20,30H4.87Z"
+                              ></path><path
+                                d="M33.11,27.44l-14-14,2.36-2.36L14.52,4.13,5.58,13.07,12.51,20l2.35-2.34,14,14a3,3,0,0,0,4.24,0A3,3,0,0,0,33.11,27.44ZM8.4,13.07,14.52,7l4.11,4.11-6.12,6.11Zm23.29,17.2a1,1,0,0,1-1.41,0l-14-14,1.41-1.41,14,14A1,1,0,0,1,31.69,30.27Z"
+                              ></path>
+                              <rect x="0" y="0" width="36" height="36" fill-opacity="0"></rect>
+                            </g></svg
+                          >
+                          <div class="grow">
+                            <p class="text-sm font-medium text-primary-50 md:text-primary-500">Litigation</p>
+                            <p class="text-sm text-gray-500">
+                              Commercial and contractual disputes, fraud investigations and more...
+                            </p>
+                          </div>
+                        </a>
+                        <!-- End Link -->
+
+                        <!-- Link -->
+                        <a
+                          class="flex gap-x-4 rounded-lg p-3 hover:bg-gray-100 focus:outline-none"
+                          href="additional-services">
+                          <svg
+                            class="h-8 w-8 stroke-primary-50 md:stroke-primary-500"
+                            version="1.1"
+                            id="Icons"
+                            xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                            viewBox="0 0 32 32"
+                            xml:space="preserve"
+                            fill="#000000"
+                            ><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g
+                              id="SVGRepo_tracerCarrier"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier">
+                              <style type="text/css">
+                                .st0 {
+                                  fill: none;
+                                  stroke-width: 1.28;
+                                  stroke-linecap: round;
+                                  stroke-linejoin: round;
+                                  stroke-miterlimit: 10;
+                                }
+                              </style>
+                              <polygon class="st0" points="16,3 3,10 3,13 29,13 29,10 "></polygon>
+                              <rect x="14" y="13" class="st0" width="4" height="10"></rect>
+                              <rect x="23" y="13" class="st0" width="4" height="10"></rect>
+                              <rect x="5" y="13" class="st0" width="4" height="10"></rect>
+                              <rect x="3" y="23" class="st0" width="26" height="3"></rect>
+                              <rect x="1" y="26" class="st0" width="30" height="3"></rect>
+                            </g></svg
+                          >
+                          <div class="grow">
+                            <p class="text-sm font-medium text-primary-50 md:text-primary-500">Additional Services</p>
+                            <p class="text-sm text-gray-500">Affidavits, company law, criminal law and more...</p>
+                          </div>
+                        </a>
+                        <!-- End Link -->
+                      </div>
+                      <!-- End Col -->
+
+                      <div class="mt-2 flex flex-col md:mt-0">
+                        <span class="mb-2 ms-2.5 text-xs font-semibold uppercase text-primary-50 md:text-primary-400"
+                          >Need legal advice?</span
+                        >
+
+                        <!-- Link -->
+                        <a
+                          class="flex items-center gap-x-5 rounded-xl p-3 hover:bg-gray-100 focus:outline-none"
+                          href="#contact">
+                          <div class="grow">
+                            <p class="text-sm text-primary-50 md:text-primary-500">
+                              Let's discuss your legal needs and how our services can support you. Complete the form
+                              below, and one of our solicitors will contact you for a confidential consultation.
+                            </p>
+                            <p
+                              class="mt-3 inline-flex items-center gap-x-1 text-sm font-medium text-primary-600 decoration-2 group-hover:underline group-focus:underline">
+                              Contact us today
+                              <svg
+                                class="size-4 shrink-0"
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg
+                              >
+                            </p>
+                          </div>
+                        </a>
+                        <!-- End Link -->
+                      </div>
+                      <!-- End Col -->
                     </div>
+                    <!-- End Grid -->
                   </div>
                 </div>
-                <!-- End Mega Menu -->
-  
-                <a class="p-2 flex items-center text-sm text-primary-50 focus:ring-2 " href="/about">
-                  <svg class="shrink-0 size-4 me-3 md:me-2 block md:hidden" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                  About
-                </a>
-
               </div>
-            </div>
-  
-            <div class="my-2 md:my-0 md:mx-2">
-              <div class="w-full h-px md:w-px md:h-4 bg-gray-100 md:bg-gray-300 "></div>
-            </div>
-  
-            <!-- Button Group -->
-            <div class=" flex flex-wrap items-center gap-x-1.5">
-              <a class="btn btn-link text-primary-100" href="https://portal.narsonssolicitors.co.uk/" target="_blank">
-                Sign in
+              <!-- End Mega Menu -->
+
+              <a class="flex items-center p-2 text-sm text-primary-50 focus:ring-2" href="/about">
+                <svg
+                  class="me-3 block size-4 shrink-0 md:me-2 md:hidden"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  ><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"
+                  ></circle></svg
+                >
+                About
               </a>
-              <a class="btn btn-primary" href="#contact">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-at-sign"><circle cx="12" cy="12" r="4"/><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-4 8"/></svg>
-               Contact
-              </a>
             </div>
-            <!-- End Button Group -->
           </div>
+
+          <div class="my-2 md:mx-2 md:my-0">
+            <div class="h-px w-full bg-gray-100 md:h-4 md:w-px md:bg-gray-300"></div>
+          </div>
+
+          <!-- Button Group -->
+          <div class="flex flex-wrap items-center gap-x-1.5">
+            <a class="btn btn-link text-primary-100" href="https://portal.narsonssolicitors.co.uk/" target="_blank">
+              Sign in
+            </a>
+            <a class="btn btn-primary" href="#contact">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-at-sign"
+                ><circle cx="12" cy="12" r="4"></circle><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-4 8"></path></svg
+              >
+              Contact
+            </a>
+          </div>
+          <!-- End Button Group -->
         </div>
       </div>
-      <!-- End Collapse -->
-    </nav>
-  </header>
+    </div>
+    <!-- End Collapse -->
+  </nav>
+</header>

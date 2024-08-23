@@ -11,10 +11,11 @@ import sitemap from "@astrojs/sitemap";
 export default defineConfig({
   output: "server",
   adapter: node({
-    mode: "standalone"
+    mode: "middleware"
   }),
   site: 'https://narsonssolicitors.co.uk',
-  integrations: [react(), tailwind(), swup({
+  integrations: [react(), tailwind(), 
+    swup({
     theme: 'slide',
     animationClass: 'transition-',
     containers: ['main'],
@@ -33,5 +34,6 @@ export default defineConfig({
     debug: false,
     loadOnIdle: true,
     globalInstance: false
-  }), playformCompress(), sitemap()]
+  }), 
+  playformCompress(), sitemap()]
 });

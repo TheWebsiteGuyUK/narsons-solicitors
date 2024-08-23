@@ -1,5 +1,5 @@
 {
-  "name": "eccentric-eclipse",
+  "name": "narsons-solicitors",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
@@ -23,7 +23,7 @@
     "@tailwindcss/typography": "^0.5.14",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
-    "astro": "^4.13.2",
+    "astro": "^4.14.5",
     "express": "^4.19.2",
     "preline": "^2.4.1",
     "react": "^18.3.1",

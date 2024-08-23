@@ -157,11 +157,12 @@ const services = await directus.request(
         class="grid grid-cols-1 md:grid-cols-2 gap-6 text-balance text-sm font-medium text-gray-500 lg:grid-cols-4 lg:gap-10">
         {
           services.map((service) => (
-            <a href={service.slug} class=" backdrop-blur-sm bg-white rounded-3xl hover:scale-105 hover:ring-8 ring-primary-200 transition-transform" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
-              <div >
-                <div class="flex flex-col justify-between p-4">
+            <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
+              <a href={service.slug} >
+              <div class=" bg-primary-50 rounded-3xl hover:scale-105 transition-transform hover:ring-8 ring-primary-200">
+                <div class="flex flex-col justify-between p-3">
                   <div>
-                    <p class="text-xl text-gray-900 underline underline-offset-2 decoration-dotted ">{service.title}</p>
+                    <p class="text-xl text-gray-900 underline underline-offset-2 decoration-dotted">{service.title}</p>
                     <p class="mt-2">{service.excerpt}</p>
                   </div>
                 </div>
@@ -169,13 +170,14 @@ const services = await directus.request(
                   <Image
                     src={`${import.meta.env.PUBLIC_API}/assets/${service.header_image}`}
                     alt={service.header_image_alt}
-                    width={900}
-                    height={600}
+                    width={1060}
+                    height={706}
                     class="mx-auto h-full w-full rounded-b-2xl"
                   />
                 </div>
               </div>
             </a>
+            </div>
           ))
         }
       </div>
