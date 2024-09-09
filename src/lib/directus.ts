@@ -3,6 +3,7 @@ import { createDirectus, rest } from '@directus/sdk';
 type CompanyDetails = {
   company_name: string;
   phone_number: string;
+  mobile_number: string;
   email_address: string;
   office_hours: string;
   address_line_1: string;

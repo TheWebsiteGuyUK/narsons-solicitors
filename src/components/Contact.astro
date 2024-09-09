@@ -49,9 +49,15 @@ const companyDetails = await directus.request(readSingleton('company_details'))
             <div class="grow">
               <h3 class="font-semibold text-primary-800">Phone</h3>
               <p class="mt-1 text-sm text-primary-500">
-                Call us on 
+                Main line: 
                 <a href={`tel:${companyDetails.phone_number}`}>
                   <strong>{companyDetails.phone_number}</strong>
+                </a>
+              </p>
+              <p class="mt-1 text-sm text-primary-500">
+                Mobile:
+                <a href={`tel:${companyDetails.mobile_number}`}>
+                  <strong>{companyDetails.mobile_number}</strong>
                 </a>
               </p>
             </div>
