@@ -93,7 +93,7 @@ const legalPages = await directus.request(
               {
                 services.map((service) => (
                   <li>
-                    <a href={service.slug} class="text-primary-50 transition hover:opacity-75">
+                    <a href={`/${service.slug}`} class="text-primary-50 transition hover:opacity-75">
                      
                       {service.title}
                     </a>

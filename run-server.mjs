@@ -2,10 +2,12 @@ import express from 'express';
 import { handler as ssrHandler } from './dist/server/entry.mjs';
 
 const app = express();
-// Change this based on your astro.config.mjs, `base` option.
-// They should match. The default value is "/".
+const PORT = 3000;
+
 const base = '/';
 app.use(base, express.static('dist/client/'));
 app.use(ssrHandler);
 
-app.listen(8081);
+app.listen(PORT, () => {
+    console.log(`Server running at http://localhost:${PORT}`);
+});
